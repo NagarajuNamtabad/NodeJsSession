@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const Result = require('../models/result');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
@@ -9,13 +10,30 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-  const title = req.body.title;
+
+  const examName = req.body.examName;
+  const studentName = req.body.studentName;
+  const english = req.body.english;
+  const maths = req.body.maths;
+  const physics =req.body.physics;
+  const chemistry =req.body.chemistry;
+  const result = new Result(null, examName, studentName, english, maths, physics, chemistry);
+  result.save()
+  .then(() => {
+    res.redirect('/');
+  })
+  .catch(err => console.log(err));
+  /*const title = req.body.title;
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  const product = new Product(null, title, imageUrl, description, price);
-  product.save();
-  res.redirect('/');
+  const commands =req.body.commands;
+  const product = new Product(null, title, imageUrl, description, price, commands);
+  product.save()
+  .then(() => {
+    res.redirect('/');
+  })
+  .catch(err => console.log(err));*/
 };
 
 exports.getEditProduct = (req, res, next) => {
@@ -57,6 +75,7 @@ exports.postEditProduct = (req, res, next) => {
 exports.getProducts = (req, res, next) => {
   Product.fetchAll(products => {
     res.render('admin/products', {
+     // prods: result,
       prods: products,
       pageTitle: 'Admin Products',
       path: '/admin/products'
