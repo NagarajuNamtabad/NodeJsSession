@@ -27,18 +27,29 @@ exports.getProduct = (req, res, next) => {
 };
 
 exports.getIndex = (req, res, next) => {
-  Result.fetchAll()
+  Result.findAll()
+  .then(results => {
+    res.render('shop/index', {
+      prods: results,
+      pageTitle: 'Shop', 
+      path: '/'
+    });
+  })
+  .catch(err => {
+    console.log(err);
+  });
+ /* Result.fetchAll()
   .then(([rows, fieldData]) => {
     console.log(fieldData);
     console.log(rows);
     res.render('shop/index', {
       prods: rows,
-      pageTitle: 'Shop',
+      pageTitle: 'Shop', 
       path: '/'
     });
 
   })
-  .catch(err => console.log(err));
+  .catch(err => console.log(err));*/
 
   
 };

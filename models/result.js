@@ -1,4 +1,44 @@
-const db = require('../util/database');
+const Sequelize = require('sequelize');
+
+const sequelize = require('../util/database');
+
+const Result = sequelize.define('result', {
+   id: {
+     type: Sequelize.INTEGER,
+     autoIncrement: true,
+     allowNull: false,
+     primaryKey: true
+   },
+   examName: {
+     type: Sequelize.STRING,
+     allowNull: false
+   },
+   studentName: {
+     type: Sequelize.STRING,
+     allowNull: false
+   },
+   english: {
+     type: Sequelize.INTEGER,
+     allowNull: false
+   },
+   maths: {
+     type: Sequelize.INTEGER,
+     allowNull: false
+   },
+   physics: {
+     type: Sequelize.INTEGER,
+     allowNull: false
+   },
+   chemistry: {
+     type: Sequelize.INTEGER,
+     allowNull: false
+   }
+});
+
+module.exports = Result;
+
+
+/* const db = require('../util/database');
 const Cart = require('./cart');
 
 module.exports = class Result {
@@ -22,4 +62,4 @@ module.exports = class Result {
   static fetchAll(){
       return db.execute('SELECT * FROM result');
   }
-};
+}; */

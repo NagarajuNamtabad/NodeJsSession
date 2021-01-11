@@ -10,63 +10,35 @@
     <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST">
         <div class="form-control">
             <label for="title">Exam Name</label>
-            <input type="text" name="examName" id="examName" value="<% if (editing) { %><%= product.examName %><% } %>">
+            <input type="text" name="examName" id="examName" value="<% if (editing) { %><%= result.examName %><% } %>">
         </div>
         <div class="form-control">
             <label for="title">Student Name</label>
-            <input type="text" name="studentName" id="studentName" value="<% if (editing) { %><%= product.studentName %><% } %>">
+            <input type="text" name="studentName" id="studentName" value="<% if (editing) { %><%= result.studentName %><% } %>">
         </div>
         <div class="form-control">
             <label for="title">English</label>
-            <input type="text" name="english" id="english" value="<% if (editing) { %><%= product.english %><% } %>">
+            <input type="text" name="english" id="english" value="<% if (editing) { %><%= result.english %><% } %>">
         </div>
         <div class="form-control">
             <label for="title">Maths</label>
-            <input type="text" name="maths" id="maths" value="<% if (editing) { %><%= product.maths %><% } %>">
+            <input type="text" name="maths" id="maths" value="<% if (editing) { %><%= result.maths %><% } %>">
         </div>
         <div class="form-control">
             <label for="title">Physics</label>
-            <input type="text" name="physics" id="physics" value="<% if (editing) { %><%= product.physics %><% } %>">
+            <input type="text" name="physics" id="physics" value="<% if (editing) { %><%= result.physics %><% } %>">
         </div>
         <div class="form-control">
             <label for="title">Chemistry</label>
-            <input type="text" name="chemistry" id="chemistry" value="<% if (editing) { %><%= product.chemistry %><% } %>">
+            <input type="text" name="chemistry" id="chemistry" value="<% if (editing) { %><%= result.chemistry %><% } %>">
         </div>
         <% if (editing) { %>
-            <input type="hidden" value="<%= product.id %>" name="productId">
+            <input type="hidden" value="<%= result.id %>" name="resultId">
         <% } %>
 
         <button class="btn" type="submit"><% if (editing) { %>Update Result<% } else { %>Add Result<% } %></button>
     </form>
 </main>
 
-    <!-- <main>
-        <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST">
-            <div class="form-control">
-                <label for="title">Title</label>
-                <input type="text" name="title" id="title" value="<% if (editing) { %><%= product.title %><% } %>">
-            </div>
-            <div class="form-control">
-                <label for="imageUrl">Image URL</label>
-                <input type="text" name="imageUrl" id="imageUrl" value="<% if (editing) { %><%= product.imageUrl %><% } %>">
-            </div>
-            <div class="form-control">
-                <label for="price">Price</label>
-                <input type="number" name="price" id="price" step="0.01" value="<% if (editing) { %><%= product.price %><% } %>">
-            </div>
-            <div class="form-control">
-                <label for="description">Description</label>
-                <textarea name="description" id="description" rows="5"><% if (editing) { %><%= product.description %><% } %></textarea>
-            </div>
-            <div class="form-control">
-                <label for="description">Commands</label>
-                <textarea name="commands" id="commands" rows="5"><% if (editing) { %><%= product.commands %><% } %></textarea>
-            </div>
-            <% if (editing) { %>
-                <input type="hidden" value="<%= product.id %>" name="productId">
-            <% } %>
-
-            <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Add Product<% } %></button>
-        </form>
-    </main> -->
+    
 <%- include('../includes/end.ejs') %>
