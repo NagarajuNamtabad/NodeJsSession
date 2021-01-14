@@ -1,6 +1,7 @@
 const Product = require('../models/product');
 const Result = require('../models/result');
 const Cart = require('../models/cart');
+const Sequelize = require('sequelize');
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll()
@@ -27,8 +28,31 @@ exports.getProduct = (req, res, next) => {
 };
 
 exports.getIndex = (req, res, next) => {
-  Result.findAll()
+  Result.findAll({
+    attributes: [
+      'examName',
+      'studentName',
+      'english',
+      'maths',
+      'physics',
+      'chemistry',
+      [
+        Sequelize.fn(
+          'SUM',
+          Sequelize.where(Sequelize.col('english'), '+',
+                          Sequelize.col('maths'), '+',
+                          Sequelize.col('physics'), '+',
+                          Sequelize.col('chemistry'))
+        ),
+        'total_marks',
+      ],
+    ],
+    group: ['examName','studentName', 'english', 'maths', 'physics', 'chemistry'],
+  })
   .then(results => {
+    console.log(results);
+    console.log(results.english);
+   // console.log(results.fieldData);
     res.render('shop/index', {
       prods: results,
       pageTitle: 'Shop', 
