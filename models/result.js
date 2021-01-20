@@ -32,7 +32,13 @@ const Result = sequelize.define('result', {
    chemistry: {
      type: Sequelize.INTEGER,
      allowNull: false
-   }
+   },
+
+   totalmarks: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+   
 });
 
 module.exports = Result;

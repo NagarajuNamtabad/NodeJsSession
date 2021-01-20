@@ -1,7 +1,10 @@
 const Product = require('../models/product');
 const Result = require('../models/result');
 const Cart = require('../models/cart');
+const User = require('../models/user');
 const Sequelize = require('sequelize');
+const { QueryTypes } = require('sequelize');
+
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll()
@@ -13,7 +16,11 @@ exports.getProducts = (req, res, next) => {
     });
 
   })
-  .catch(err => console.log(err));
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.getProduct = (req, res, next) => {
@@ -24,58 +31,21 @@ exports.getProduct = (req, res, next) => {
       pageTitle: product.title,
       path: '/products'
     });
-  }).catch(err => console.log(err));
+  }).catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.getIndex = (req, res, next) => {
-  Result.findAll({
-    attributes: [
-      'examName',
-      'studentName',
-      'english',
-      'maths',
-      'physics',
-      'chemistry',
-      [
-        Sequelize.fn(
-          'SUM',
-          Sequelize.where(Sequelize.col('english'), '+',
-                          Sequelize.col('maths'), '+',
-                          Sequelize.col('physics'), '+',
-                          Sequelize.col('chemistry'))
-        ),
-        'total_marks',
-      ],
-    ],
-    group: ['examName','studentName', 'english', 'maths', 'physics', 'chemistry'],
-  })
-  .then(results => {
-    console.log(results);
-    console.log(results.english);
-   // console.log(results.fieldData);
-    res.render('shop/index', {
-      prods: results,
+
+  res.render('shop/index', {
+    //  prods: rows,
+     //   prods: result1,
       pageTitle: 'Shop', 
       path: '/'
     });
-  })
-  .catch(err => {
-    console.log(err);
-  });
- /* Result.fetchAll()
-  .then(([rows, fieldData]) => {
-    console.log(fieldData);
-    console.log(rows);
-    res.render('shop/index', {
-      prods: rows,
-      pageTitle: 'Shop', 
-      path: '/'
-    });
-
-  })
-  .catch(err => console.log(err));*/
-
-  
 };
 
 exports.getCart = (req, res, next) => {

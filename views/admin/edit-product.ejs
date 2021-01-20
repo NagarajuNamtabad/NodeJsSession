@@ -7,30 +7,63 @@
    <%- include('../includes/navigation.ejs') %>
 
    <main>
+    <% if(errorMessage) { %>
+        <div class="user-message user-message--error"><%= errorMessage %></div>
+    <% } %>
     <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST">
         <div class="form-control">
             <label for="title">Exam Name</label>
-            <input type="text" name="examName" id="examName" value="<% if (editing) { %><%= result.examName %><% } %>">
+            <input 
+            class="<%= validationErrors.find(e => e.param === 'examName') ? 'invalid' : '' %>"
+            type="text" 
+            name="examName" 
+            id="examName" 
+            value="<% if (editing || hasError ) { %><%= result.examName %><% } %>">
         </div>
         <div class="form-control">
             <label for="title">Student Name</label>
-            <input type="text" name="studentName" id="studentName" value="<% if (editing) { %><%= result.studentName %><% } %>">
+            <input 
+            class="<%= validationErrors.find(e => e.param === 'studentName') ? 'invalid' : '' %>"
+            type="text" 
+            name="studentName" 
+            id="studentName" 
+            value="<% if (editing || hasError ) { %><%= result.studentName %><% } %>">
         </div>
         <div class="form-control">
             <label for="title">English</label>
-            <input type="text" name="english" id="english" value="<% if (editing) { %><%= result.english %><% } %>">
+            <input 
+            class="<%= validationErrors.find(e => e.param === 'english') ? 'invalid' : '' %>"
+            type="text" 
+            name="english" 
+            id="english" 
+            value="<% if (editing || hasError ) { %><%= result.english %><% } %>">
         </div>
         <div class="form-control">
             <label for="title">Maths</label>
-            <input type="text" name="maths" id="maths" value="<% if (editing) { %><%= result.maths %><% } %>">
+            <input 
+            class="<%= validationErrors.find(e => e.param === 'maths') ? 'invalid' : '' %>"
+            type="text" 
+            name="maths" 
+            id="maths" 
+            value="<% if (editing || hasError ) { %><%= result.maths %><% } %>">
         </div>
         <div class="form-control">
             <label for="title">Physics</label>
-            <input type="text" name="physics" id="physics" value="<% if (editing) { %><%= result.physics %><% } %>">
+            <input 
+            class="<%= validationErrors.find(e => e.param === 'physics') ? 'invalid' : '' %>"
+            type="text" 
+            name="physics" 
+            id="physics" 
+            value="<% if (editing || hasError ) { %><%= result.physics %><% } %>">
         </div>
         <div class="form-control">
             <label for="title">Chemistry</label>
-            <input type="text" name="chemistry" id="chemistry" value="<% if (editing) { %><%= result.chemistry %><% } %>">
+            <input 
+            class="<%= validationErrors.find(e => e.param === 'chemistry') ? 'invalid' : '' %>"
+            type="text" 
+            name="chemistry" 
+            id="chemistry" 
+            value="<% if (editing || hasError ) { %><%= result.chemistry %><% } %>">
         </div>
         <% if (editing) { %>
             <input type="hidden" value="<%= result.id %>" name="resultId">
