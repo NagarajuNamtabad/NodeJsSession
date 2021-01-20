@@ -5,8 +5,13 @@
         <ul class="main-header__item-list">
             <% if(isAuthenticated) { %>
             <li class="main-header__item">
-                <a class="<%= path === '/' ? 'active' : '' %>" href="/">Result</a>
+                <a class="<%= path === '/' ? 'active' : '' %>" href="/"></a>
             </li>
+            <li class="main-header__item">
+                <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/products">Result
+                </a>
+            </li>
+            
             <li class="main-header__item">
                 <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Exam Result
                 </a>
